@@ -4,7 +4,7 @@ COPY build_files /
 COPY system_files /system_files
 
 # Base Image
-FROM ghcr.io/ublue-os/bazzite:stable@sha256:9556db65991d57a03a7dc18e4ba28a686d8bcdcd6b61235aa69c8267bb22ff76
+FROM ghcr.io/winsdominoes/winscore-lts:latest
 ## Other possible base images include:
 # FROM ghcr.io/ublue-os/bazzite:testing
 # FROM ghcr.io/ublue-os/aurora:stable
@@ -35,6 +35,13 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/build.sh
+COPY --from=ghcr.io/ublue-os/akmods-nvidia-open:longterm-6.18-44 / /tmp/akmods-nvidia-open
+RUN find /tmp/akmods-nvidia-open
+## optionally install remove old and install new kernel
+# dnf -y remove --no-autoremove kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra
+## install ublue support package and desired kmod(s)
+RUN dnf install /tmp/rpms/ublue-os/ublue-os-nvidia*.rpm
+RUN dnf install /tmp/rpms/kmods/kmod-nvidia*.rpm
 
 ### LINTING
 ## Verify final image and contents are correct.
