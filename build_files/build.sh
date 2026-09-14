@@ -13,7 +13,7 @@ cp -avf "/ctx/system_files"/. /
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/43/x86_64/repoview/index.html&protocol=https&redirect=1
 dnf config-manager --add-repo=https://negativo17.org/repos/epel-nvidia.repo
 dnf config-manager setopt epel-nvidia=0
-dnf -y install --enablerepo=fedora-multimedia \
+dnf -y install --enablerepo=epel-nvidia \
     nvidia-driver nvidia-driver-libs nvidia-driver-cuda cuda-devel
 
 # this installs a package from fedora repos
