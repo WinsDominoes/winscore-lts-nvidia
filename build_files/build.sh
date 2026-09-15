@@ -14,7 +14,7 @@ cp -avf "/ctx/system_files"/. /
 dnf config-manager --add-repo=https://negativo17.org/repos/epel-nvidia.repo
 dnf config-manager --set-disabled epel-nvidia
 dnf -y install --enablerepo=epel-nvidia \
-    nvidia-driver nvidia-driver-libs nvidia-driver-cuda cuda-devel
+    nvidia-driver nvidia-driver-libs nvidia-driver-cuda
 
 # this installs a package from fedora repos
 dnf install -y 
