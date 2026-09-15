@@ -17,7 +17,6 @@ dnf -y install --enablerepo=epel-nvidia \
     nvidia-driver nvidia-driver-libs nvidia-driver-cuda
 
 # this installs a package from fedora repos
-dnf install -y 
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
