@@ -38,7 +38,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 COPY --from=ghcr.io/ublue-os/akmods-nvidia-open:longterm-6.18-44 / /tmp/akmods-nvidia-open
 RUN find /tmp/akmods-nvidia-open
 ## optionally install remove old and install new kernel
-RUN dnf -y remove --no-autoremove kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra
+RUN dnf -y remove kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra
 ## install ublue support package and desired kmod(s)
 RUN dnf install /tmp/rpms/ublue-os/ublue-os-nvidia*.rpm
 RUN dnf install /tmp/rpms/kmods/kmod-nvidia*.rpm
