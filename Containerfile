@@ -31,19 +31,13 @@ FROM ghcr.io/winsdominoes/winscore-lts:latest
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
 
 ### Change permissions
-RUN chmod +x /nvidia.sh
+RUN ls -l
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/build.sh
-
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/nvidia.sh
 
 #COPY --from=ghcr.io/ublue-os/akmods-nvidia-open:longterm-6.18-44 / /tmp/akmods-nvidia-open
 #RUN find /tmp/akmods-nvidia-open

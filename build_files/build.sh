@@ -35,6 +35,8 @@ dnf -y --enablerepo docker-ce-stable install \
 	containerd.io \
 	docker-buildx-plugin \
 	docker-compose-plugin
+    
+"${BUILD_SCRIPTS_PATH}/nvidia.sh"
 
 # Use a COPR Example:
 #
