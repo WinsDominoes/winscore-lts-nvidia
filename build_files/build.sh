@@ -37,7 +37,7 @@ dnf -y --enablerepo docker-ce-stable install \
 	docker-compose-plugin
 
 # Run NVIDIA script
-"${BUILD_SCRIPTS_PATH}/nvidia.sh"
+"./nvidia.sh"
 
 # Use a COPR Example:
 #
