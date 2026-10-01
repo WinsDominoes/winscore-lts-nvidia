@@ -36,9 +36,6 @@ dnf -y --enablerepo docker-ce-stable install \
 	docker-buildx-plugin \
 	docker-compose-plugin
 
-# Run NVIDIA script
-"./nvidia.sh"
-
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
