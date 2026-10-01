@@ -36,7 +36,7 @@ dnf -y --enablerepo docker-ce-stable install \
 	docker-buildx-plugin \
 	docker-compose-plugin
     
-"${BUILD_SCRIPTS_PATH}/nvidia.sh"
+# "${BUILD_SCRIPTS_PATH}/nvidia.sh"
 
 # Use a COPR Example:
 #
