@@ -19,6 +19,7 @@ export MAJOR_VERSION_NUMBER
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
 #dnf5 install -y 'dnf-command(config-manager)' epel-release
+dnf5 config-manager --help
 dnf5 config-manager enable crb
 dnf5 -y copr enable secureblue/run0edit
 dnf5 config-manager add-repo --id="tailscale" --from-repofile="https://pkgs.tailscale.com/stable/rhel/10/tailscale.repo"
