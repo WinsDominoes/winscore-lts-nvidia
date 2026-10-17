@@ -19,10 +19,13 @@ export MAJOR_VERSION_NUMBER
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
 ## run0edit
-dnf5 -y copr enable secureblue/run0edit
+dnf -y copr enable secureblue/run0edit
+
+## Docker repo
+dnf config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
 
 # Installs packages from Fedora Repositories
-dnf5 -y install \
+dnf -y install \
 	tailscale \
 	distrobox \
 	podman \
@@ -42,11 +45,10 @@ dnf5 -y install \
 	docker-ce-cli \
 	containerd.io \
 	docker-buildx-plugin \
-	docker-compose-plugin \
-	tailscale
+	docker-compose-plugin
 
 ### Remove GNOME (No need for GUI, just the NVIDIA drivers. Please.)
-dnf5 -y remove gnome-\*
+dnf -y remove gnome-\*
 
 # Use a COPR Example:
 #
@@ -55,8 +57,8 @@ dnf5 -y remove gnome-\*
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
 sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/tailscale.repo
-dnf5 -y remove PackageKit subscription-manager
-dnf5 -y copr disable secureblue/run0edit
+dnf -y remove PackageKit subscription-manager
+dnf -y copr disable secureblue/run0edit
 
 #### Enabling System Unit Files
 systemctl enable brew-setup.service
