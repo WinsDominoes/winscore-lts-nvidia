@@ -4,11 +4,11 @@ COPY build_files /
 COPY system_files /system_files
 
 # Base Image
-FROM ghcr.io/winsdominoes/winscore-lts:latest
+# FROM ghcr.io/winsdominoes/winscore-lts:latest
 ## Other possible base images include:
 # FROM ghcr.io/ublue-os/bazzite:testing
 # FROM ghcr.io/ublue-os/aurora:stable
-# FROM ghcr.io/ublue-os/bluefin-nvidia-open:stable
+FROM ghcr.io/ublue-os/bluefin-nvidia:stable
 # 
 # ... and so on, here are more base images
 # Universal Blue Images: https://github.com/orgs/ublue-os/packages
@@ -31,23 +31,11 @@ FROM ghcr.io/winsdominoes/winscore-lts:latest
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
 
 ### Change permissions
-RUN ls -l
-
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/build.sh
-
-COPY --from=ghcr.io/ublue-os/akmods-nvidia-open:longterm-6.18-44 / /tmp/akmods-nvidia-open
-RUN ls /tmp/
-RUN ls /tmp/akmods-nvidia-open
-RUN find /tmp/akmods-nvidia-open
-## optionally install remove old and install new kernel
-RUN dnf -y remove kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra
-## install ublue support package and desired kmod(s)
-RUN dnf -y install /tmp/akmods-nvidia-open/rpms/ublue-os/ublue-os-nvidia*.rpm
-RUN dnf -y install /tmp/akmods-nvidia-open/rpms/kmods/kmod-nvidia*.rpm
 
 ### LINTING
 ## Verify final image and contents are correct.

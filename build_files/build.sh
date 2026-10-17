@@ -22,9 +22,8 @@ dnf install -y 'dnf-command(config-manager)' epel-release
 dnf config-manager --set-enabled crb
 dnf -y copr enable secureblue/run0edit
 dnf config-manager --add-repo https://pkgs.tailscale.com/stable/rhel/10/tailscale.repo
-# this installs a package from fedora repos
+# Installs packages from Fedora Repositories
 dnf -y install tailscale distrobox podman cockpit samba run0edit git gcc NetworkManager libvirt qemu-kvm cmake llvm
-
 
 dnf config-manager --add-repo "https://download.docker.com/linux/rhel/docker-ce.repo"
 dnf config-manager --set-disabled docker-ce-stable
@@ -35,8 +34,9 @@ dnf -y --enablerepo docker-ce-stable install \
 	containerd.io \
 	docker-buildx-plugin \
 	docker-compose-plugin
-    
-# "${BUILD_SCRIPTS_PATH}/nvidia.sh"
+
+### Remove GNOME (No need for GUI, just the NVIDIA drivers. Please.)
+dnf -y remove gnome-\*
 
 # Use a COPR Example:
 #
@@ -47,7 +47,8 @@ dnf -y --enablerepo docker-ce-stable install \
 sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/tailscale.repo
 dnf -y remove PackageKit subscription-manager
 dnf -y copr disable secureblue/run0edit
-#### Example for enabling a System Unit File
+
+#### Enabling System Unit Files
 systemctl enable brew-setup.service
 systemctl enable tailscaled.service
 systemctl enable podman.socket
@@ -61,8 +62,6 @@ systemctl --global enable podman-auto-update.timer
 systemctl enable bootc-fetch-apply-updates.timer
 systemctl enable libvirtd
 systemctl enable virtlogd
-
-
 
 # /*
 # docker sysctl.d
