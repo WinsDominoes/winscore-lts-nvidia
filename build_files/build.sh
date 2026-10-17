@@ -18,8 +18,8 @@ export MAJOR_VERSION_NUMBER
 # List of rpmfusion packages can be found here:
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
-dnf install -y 'dnf-command(config-manager)' epel-release
-dnf config-manager --set-enabled crb
+#dnf install -y 'dnf-command(config-manager)' epel-release
+#dnf config-manager --set-enabled crb
 dnf -y copr enable secureblue/run0edit
 dnf config-manager --add-repo https://pkgs.tailscale.com/stable/rhel/10/tailscale.repo
 # Installs packages from Fedora Repositories
