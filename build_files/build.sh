@@ -18,9 +18,6 @@ export MAJOR_VERSION_NUMBER
 # List of rpmfusion packages can be found here:
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
-dnf install -y epel-release
-dnf config-manager --set-enabled crb
-
 ## run0edit
 dnf -y copr enable secureblue/run0edit
 
@@ -28,7 +25,7 @@ dnf -y copr enable secureblue/run0edit
 dnf config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
 
 # Installs packages from Fedora Repositories
-dnf -y install \
+dnf -y install --skip-unavailable \
 	tailscale \
 	distrobox \
 	podman \
