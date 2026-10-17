@@ -18,17 +18,17 @@ export MAJOR_VERSION_NUMBER
 # List of rpmfusion packages can be found here:
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
-#dnf install -y 'dnf-command(config-manager)' epel-release
-#dnf config-manager --set-enabled crb
-dnf -y copr enable secureblue/run0edit
-dnf config-manager --add-repo https://pkgs.tailscale.com/stable/rhel/10/tailscale.repo
+#dnf5 install -y 'dnf-command(config-manager)' epel-release
+dnf5 config-manager --set-enabled crb
+dnf5 -y copr enable secureblue/run0edit
+dnf5 config-manager --add-repo https://pkgs.tailscale.com/stable/rhel/10/tailscale.repo
 # Installs packages from Fedora Repositories
-dnf -y install tailscale distrobox podman cockpit samba run0edit git gcc NetworkManager libvirt qemu-kvm cmake llvm
+dnf5 -y install tailscale distrobox podman cockpit samba run0edit git gcc NetworkManager libvirt qemu-kvm cmake llvm
 
-dnf config-manager --add-repo "https://download.docker.com/linux/rhel/docker-ce.repo"
-dnf config-manager --set-disabled docker-ce-stable
-dnf -y install rsync rsnapshot
-dnf -y --enablerepo docker-ce-stable install \
+dnf5 config-manager --add-repo "https://download.docker.com/linux/rhel/docker-ce.repo"
+dnf5 config-manager --set-disabled docker-ce-stable
+dnf5 -y install rsync rsnapshot
+dnf5 -y --enablerepo docker-ce-stable install \
 	docker-ce \
 	docker-ce-cli \
 	containerd.io \
@@ -36,7 +36,7 @@ dnf -y --enablerepo docker-ce-stable install \
 	docker-compose-plugin
 
 ### Remove GNOME (No need for GUI, just the NVIDIA drivers. Please.)
-dnf -y remove gnome-\*
+dnf5 -y remove gnome-\*
 
 # Use a COPR Example:
 #
@@ -45,8 +45,8 @@ dnf -y remove gnome-\*
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
 sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/tailscale.repo
-dnf -y remove PackageKit subscription-manager
-dnf -y copr disable secureblue/run0edit
+dnf5 -y remove PackageKit subscription-manager
+dnf5 -y copr disable secureblue/run0edit
 
 #### Enabling System Unit Files
 systemctl enable brew-setup.service
