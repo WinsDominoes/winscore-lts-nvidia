@@ -18,26 +18,32 @@ export MAJOR_VERSION_NUMBER
 # List of rpmfusion packages can be found here:
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
-#dnf5 install -y 'dnf-command(config-manager)' epel-release
-dnf5 config-manager --help
-dnf5 config-manager enable crb
+## run0edit
 dnf5 -y copr enable secureblue/run0edit
-dnf5 config-manager add-repo --id="tailscale" --from-repofile="https://pkgs.tailscale.com/stable/rhel/10/tailscale.repo"
 
 # Installs packages from Fedora Repositories
-dnf5 -y install tailscale distrobox podman cockpit samba run0edit git gcc NetworkManager libvirt qemu-kvm cmake llvm
-
-dnf5 config-manager add-repo --id="docker-ce-stable" --from-repofile="https://download.docker.com/linux/rhel/docker-ce.repo"
-dnf5 -y enable docker-ce-stable
-
-dnf5 -y install rsync rsnapshot
-
 dnf5 -y install \
+	tailscale \
+	distrobox \
+	podman \
+	cockpit \
+	samba \
+	run0edit \
+	git \
+	gcc \
+	NetworkManager \
+	libvirt \
+	qemu-kvm \
+	cmake \
+	llvm \
+	rsync \
+	rsnapshot \
 	docker-ce \
 	docker-ce-cli \
 	containerd.io \
 	docker-buildx-plugin \
-	docker-compose-plugin
+	docker-compose-plugin \
+	tailscale
 
 ### Remove GNOME (No need for GUI, just the NVIDIA drivers. Please.)
 dnf5 -y remove gnome-\*
