@@ -24,6 +24,8 @@ dnf -y copr enable secureblue/run0edit
 ## Docker repo
 dnf config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
 
+dnf -y update
+
 # Installs packages from Fedora Repositories
 dnf -y install --skip-unavailable \
 	tailscale \
